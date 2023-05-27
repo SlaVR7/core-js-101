@@ -75,7 +75,7 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
   const date = new Date(endDate - startDate);
-  const hours = String(date.getHours() - 3).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   const seconds = String(date.getSeconds()).padStart(2, '0');
   const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
@@ -100,7 +100,7 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  const hours = (date.getHours() - 3) % 12;
+  const hours = (date.getHours()) % 12;
   const minutes = date.getMinutes();
   const hoursAngle = (360 / 12) * hours + (360 / 12 / 60) * minutes;
   const minutesAngle = (360 / 60) * minutes;
