@@ -5,7 +5,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date     *
  *                                                                                           *
  ******************************************************************************************* */
-
+process.env.TZ = 'UTC';
 
 /**
  * Parses a rfc2822 string date representation into date value
