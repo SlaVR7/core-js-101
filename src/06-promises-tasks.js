@@ -30,6 +30,15 @@
  */
 function willYouMarryMe(/* isPositiveAnswer */) {
   throw new Error('Not implemented');
+  // return new Promise((resolve, reject) => {
+  //   if (typeof isPositiveAnswer !== 'boolean') {
+  //     reject(new Error('Передан неверный параметр! Спросите её ещё раз.'));
+  //   } else if (isPositiveAnswer) {
+  //     resolve('Ура!!! Она сказала "Да"!');
+  //   } else {
+  //     resolve('О нет, она сказала "Нет".');
+  //   }
+  // });
 }
 
 
