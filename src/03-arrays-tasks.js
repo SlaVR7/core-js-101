@@ -8,6 +8,8 @@
  ******************************************************************************************** */
 
 
+// const { main } = require('mocha/lib/cli');
+
 /**
  * Returns an index of the specified element in array or -1 if element is not found
  *
@@ -463,9 +465,24 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  function createMatrix(i, j, matrix) {
+    if (i > n) {
+      return matrix;
+    }
+    if (j > n) {
+      return createMatrix(i + 1, 1, matrix);
+    }
+    const value = i === j ? 1 : 0;
+    const updatedMatrix = [...matrix];
+    updatedMatrix[i - 1][j - 1] = value;
+    return createMatrix(i, j + 1, updatedMatrix);
+  }
+
+  const matrix = Array.from({ length: n }, () => Array(n).fill(0));
+  return createMatrix(1, 1, matrix);
 }
+
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
@@ -565,8 +582,12 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  if (indexes.length === 0) {
+    return arr;
+  }
+  const [currentIndex, ...restIndexes] = indexes;
+  return getElementByIndexes(arr[currentIndex], restIndexes);
 }
 
 
@@ -588,10 +609,20 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let result;
+  if (arr.length % 2) {
+    const firstPart = arr.slice(0, Math.floor(arr.length / 2));
+    const middleNum = arr[Math.floor(arr.length / 2)];
+    const secondPart = arr.slice(Math.ceil(arr.length / 2));
+    result = secondPart.concat(middleNum, firstPart);
+  } else {
+    const firstPart = arr.slice(0, arr.length / 2);
+    const secondPart = arr.slice(arr.length / 2);
+    result = secondPart.concat(firstPart);
+  }
+  return result;
 }
-
 
 module.exports = {
   findElement,
