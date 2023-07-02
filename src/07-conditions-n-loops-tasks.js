@@ -93,7 +93,7 @@ function getSumBetweenNumbers(n1, n2) {
  * @param {number} a
  * @param {number} b
  * @param {number} c
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   1,2,3    =>  false
@@ -129,7 +129,7 @@ function isTriangle(a, b, c) {
  *
  * @param {object} rect1
  * @param {object} rect2
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
@@ -139,8 +139,16 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const left1 = rect1.left;
+  const right1 = rect1.left + rect1.width;
+  const top1 = rect1.top;
+  const bottom1 = rect1.top + rect1.height;
+  const left2 = rect2.left;
+  const right2 = rect2.left + rect2.width;
+  const top2 = rect2.top;
+  const bottom2 = rect2.top + rect2.height;
+  return !(left2 > right1 || right2 < left1 || top2 > bottom1 || bottom2 < top1);
 }
 
 
@@ -163,7 +171,7 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  * @param {object} circle
  * @param {object} point
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
@@ -212,8 +220,8 @@ function findFirstSingleChar(str) {
  *
  * @param {number} a
  * @param {number} b
- * @param {bool} isStartIncluded
- * @param {bool} isEndIncluded
+ * @param {boolean} isStartIncluded
+ * @param {boolean} isEndIncluded
  * @return {string}
  *
  * @example
@@ -339,8 +347,26 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const brackets = {
+    ']': '[',
+    ')': '(',
+    '}': '{',
+    '>': '<',
+  };
+
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (char === '[' || char === '(' || char === '{' || char === '<') {
+      stack.push(char);
+    } else if (char === ']' || char === ')' || char === '}' || char === '>') {
+      if (stack.length === 0 || stack.pop() !== brackets[char]) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
 }
 
 
